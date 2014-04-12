@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset=utf-8>
+<title>Commenting App</title>
+<body>
+    <div id="application-wrapper">
+        <ul>
+            <li class="-comment" data-app="{&quot;id&quot;:1,&quot;parentId&quot;:null}">
+                <div>
+                    <span class="comment-author">Bob</span>
+                    at
+                    <span class="comment-date">1:00 AM</span>
+                </div>
+                <div class="comment-body -body">Great Job!</div>
+                <div class="comment-tools">
+                    <a class="-reply">Reply</a>
+                    <a class="-update">Update</a>
+                    <a class="-delete">Delete</a>
+                    <a class="-flag">Flag</a>
+                </div>
+
+                <ul class="-child-comments">
+                    <li class="-comment" data-app="{&quot;id&quot;:2,&quot;parentId&quot;:null}">
+                        <div>
+                            <span class="comment-author">John</span>
+                            at
+                            <span class="comment-date">1:01 AM</span>
+                        </div>
+                        <div class="comment-body -body">Thanks!</div>
+                        <div class="comment-tools">
+                            <a class="-reply">Reply</a>
+                            <a class="-update">Update</a>
+                            <a class="-delete">Delete</a>
+                            <a class="-flag">Flag</a>
+                        </div>
+
+                        <ul class="-child-comments"></ul>
+
+                    </li>
+                </ul>
+
+            </li>
+            <li class="-comment" data-app="{&quot;id&quot;:3,&quot;parentId&quot;:null}">
+                <div>
+                    <span class="comment-author">James</span>
+                    at
+                    <span class="comment-date">1:02 AM</span>
+                </div>
+                <div class="comment-body -body">Thanks for writing this!  It was very helpful.</div>
+                <div class="comment-tools">
+                    <a class="-reply">Reply</a>
+                    <a class="-update">Update</a>
+                    <a class="-delete">Delete</a>
+                    <a class="-flag">Flag</a>
+                </div>
+
+                <ul class="-child-comments"></ul>
+
+            </li>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="handlebars-v1.3.0.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            myApp.performBinding(myApp.communicationLayer(), "#application-wrapper");
+        });
+    </script>
+    <script type="text/html" id="comment-template">
+        <li class="-comment" data-app="id: {{id}}, parentId: {{parentId}}">
+            <div>
+                <span class="comment-author">{{author}}</span>
+                at
+                <span class="comment-date">{{date}}</span>
+            </div>
+            <div class="comment-body -body">{{body}}</div>
+            <div class="comment-tools">
+                <a class="-reply">Reply</a>
+                <a class="-update">Update</a>
+                <a class="-delete">Delete</a>
+                <a class="-flag">Flag</a>
+            </div>
+            <ul class="-child-comments"></ul>
+        </li>
+    </script>
+    <script type="text/html" id="add-comment-template">
+        <li class="-add-comment-template">
+            <form class="-add-comment-form" data-app="parentId: {{parentId}}">
+                <input type="text" class="-body" />        
+                <input type="submit" class="btn" value="Submit" />        
+                <a class="btn -cancel">Cancel</a>
+            </form>
+        </li>
+    </script>
+    <script type="text/html" id="update-comment-template">
+    <form class="-update-comment-form">
+            <input type="hidden" class="-original" value="{{body}}" />       
+            <textarea class="-value">{{body}}</textarea>
+            <button class="btn" type="submit">Save</button>
+            <a class="btn -cancel">Cancel</a>
+        </form>
+    </script>
+</body>
+</html>
